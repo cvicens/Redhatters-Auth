@@ -4,9 +4,11 @@
   "dependencies": {
     "body-parser": "~1.0.2",
     "cors": "~2.2.0",
+    "crypto": "0.0.3",
     "express": "~4.0.0",
+    "fh-mbaas-api": "~7.0.9",
     "request": "2.79.0",
-    "fh-mbaas-api": "~7.0.9"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "grunt-concurrent": "latest",

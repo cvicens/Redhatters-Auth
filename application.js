@@ -38,6 +38,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(mbaasExpress.fhmiddleware());
 
 app.use('/hello', require('./lib/hello.js')());
+app.use('/auth', require('./lib/auth.js')());
 
 // Important that this is last!
 app.use(mbaasExpress.errorHandler());
