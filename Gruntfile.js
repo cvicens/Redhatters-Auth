@@ -47,8 +47,6 @@ module.exports = function(grunt) {
       // environment variables - see https://github.com/jsoverson/grunt-env for more information
       local: {
         FH_USE_LOCAL_DB: true,
-        DEV: true,
-        FH_MONGODB_CONN_URL: "mongodb://127.0.0.1/FH_LOCAL",
         FH_SERVICE_MAP: function() {
           /*
            * Define the mappings for your services here - for local development.
@@ -93,9 +91,9 @@ module.exports = function(grunt) {
           stdout: true,
           stderr: true
         },
-      command: [
+        command: [
           'rm -rf coverage cov-unit',
-          'env NODE_PATH=. ./node_modules/.bin/istanbul cover  --dir cov-unit ./node_modules/.bin/_mocha -- -u exports -R spec ./test/unit/*.js',
+          'env NODE_PATH=. ./node_modules/.bin/istanbul cover --dir cov-unit ./node_modules/.bin/turbo -- test/unit',
           './node_modules/.bin/istanbul report',
           'echo "See html coverage at: `pwd`/coverage/lcov-report/index.html"'
         ].join('&&')

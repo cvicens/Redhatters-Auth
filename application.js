@@ -1,4 +1,5 @@
-//process.env.FH_MONGODB_CONN_URL= 'mongodb://localhost:27017/FH_LOCAL';
+// VS code debugging!
+//process.env.FH_USE_LOCAL_DB = true;
 
 var mbaasApi = require('fh-mbaas-api');
 var express = require('express');
@@ -18,21 +19,6 @@ app.use(cors());
 app.use('/sys', mbaasExpress.sys(securableEndpoints));
 app.use('/mbaas', mbaasExpress.mbaas);
 
-/* uncomment this code if you want to use $fh.auth in the app preview
- * localAuth is only used for local development. 
- * If the app is deployed on the platform, 
- * this function will be ignored and the request will be forwarded 
- * to the platform to perform authentication.
-
-app.use('/box', mbaasExpress.auth({localAuth: function(req, cb){
-  return cb(null, {status:401, body: {"message": "bad request"}});
-}}));
-
-or
-
-app.use('/box', mbaasExpress.core({localAuth: {status:401, body: {"message": "not authorised”}}}));
-*/
-
 // allow serving of static files from the public directory
 app.use(express.static(__dirname + '/public'));
 
@@ -45,11 +31,8 @@ app.use('/auth', require('./lib/auth.js')());
 // Important that this is last!
 app.use(mbaasExpress.errorHandler());
 
-
-console.log('process.env.FH_MONGODB_CONN_URL', process.env.FH_MONGODB_CONN_URL);
-
 var port = process.env.FH_PORT || process.env.OPENSHIFT_NODEJS_PORT || 8001;
 var host = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 app.listen(port, host, function() {
-  console.log("App started at: " + new Date() + " on port: " + port); 
+  console.log("App started at: " + new Date() + " on port: " + port);
 });
