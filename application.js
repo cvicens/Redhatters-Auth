@@ -1,3 +1,5 @@
+//process.env.FH_MONGODB_CONN_URL= 'mongodb://localhost:27017/FH_LOCAL';
+
 var mbaasApi = require('fh-mbaas-api');
 var express = require('express');
 var mbaasExpress = mbaasApi.mbaasExpress();
@@ -42,6 +44,9 @@ app.use('/auth', require('./lib/auth.js')());
 
 // Important that this is last!
 app.use(mbaasExpress.errorHandler());
+
+
+console.log('process.env.FH_MONGODB_CONN_URL', process.env.FH_MONGODB_CONN_URL);
 
 var port = process.env.FH_PORT || process.env.OPENSHIFT_NODEJS_PORT || 8001;
 var host = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';

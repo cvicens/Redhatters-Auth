@@ -47,6 +47,8 @@ module.exports = function(grunt) {
       // environment variables - see https://github.com/jsoverson/grunt-env for more information
       local: {
         FH_USE_LOCAL_DB: true,
+        DEV: true,
+        FH_MONGODB_CONN_URL: "mongodb://127.0.0.1/FH_LOCAL",
         FH_SERVICE_MAP: function() {
           /*
            * Define the mappings for your services here - for local development.
