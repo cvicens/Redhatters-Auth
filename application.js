@@ -1,5 +1,5 @@
 // VS code debugging!
-//process.env.FH_USE_LOCAL_DB = true;
+process.env.FH_USE_LOCAL_DB = true;
 
 var mbaasApi = require('fh-mbaas-api');
 var express = require('express');
@@ -18,6 +18,17 @@ app.use(cors());
 // Note: the order which we add middleware to Express here is important!
 app.use('/sys', mbaasExpress.sys(securableEndpoints));
 app.use('/mbaas', mbaasExpress.mbaas);
+
+/* uncomment this code if you want to use $fh.auth in the app preview
+ * localAuth is only used for local development. 
+ * If the app is deployed on the platform, 
+ * this function will be ignored and the request will be forwarded 
+ * to the platform to perform authentication.
+
+app.use('/box', mbaasExpress.fhauth({localAuth: function(req, cb){
+  return cb(null, {status:401, body: {"message": "bad request"}});
+}}));*/
+//app.use('/box', mbaasExpress.core({localAuth: {status:401, body: {message: "not authorised"}}}));
 
 // allow serving of static files from the public directory
 app.use(express.static(__dirname + '/public'));
