@@ -1,5 +1,5 @@
 // VS code debugging!
-process.env.FH_USE_LOCAL_DB = true;
+//process.env.FH_USE_LOCAL_DB = true;
 
 var mbaasApi = require('fh-mbaas-api');
 var express = require('express');
